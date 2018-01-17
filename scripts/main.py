@@ -50,15 +50,25 @@ def searchWeb(text,output,c):
 	if len(query)>60:
 	    return output,c
 	#using googleapis for searching web
-	base_url = 'http://ajax.googleapis.com/ajax/services/search/web?v=1.0&q='
+	base_url = 'https://www.googleapis.com/customsearch/v1?key=AIzaSyDk2x1ul4XaM5jJTEtH1yJAhF2NH01EhOY&cx=011424971895181672036:39kcreuzgaw&q='
 	url = base_url + '%22' + query + '%22'
+	print 'url--',url
+	#sys.exit()
 	request = urllib2.Request(url,None,{'Referer':'Google Chrome'})
 	response = urllib2.urlopen(request)
 	results = simplejson.load(response)
+	print "google results"
+	print results
 	try:
-	    if ( len(results) and 'responseData' in results and 'results' in results['responseData'] and results['responseData']['results'] != []):
-		    for ele in	results['responseData']['results']:		  
+		
+		
+	    if ( len(results) and 'searchInformation' in results and 'totalResults' in results['searchInformation'] and results['searchInformation']['totalResults'] > 0):
+		    print "inside1"
+			
+		    for ele in	results['responseData']['results']:
+
 			    Match = results['responseData']['results'][0]
+			    print "inside 2"
 			    content = Match['content']
 			    if Match['url'] in output:
 				    #print text
@@ -70,6 +80,7 @@ def searchWeb(text,output,c):
 				    c[Match['url']] = cosineSim(text,strip_tags(content))
 	except:
 		return output,c
+
 	return output,c
     
 
@@ -103,17 +114,27 @@ def main():
 	if count>100:
 	    count=100
 	for s in q[:100]:
+		print "s---",s
 		output,c=searchWeb(s,output,c)
 		msg = "\r"+str(i)+"/"+str(count)+"completed..."
 		sys.stdout.write(msg);
 		sys.stdout.flush()
+		
+		print "output---",output
+		print "c---",c
+		if i == 2:
+			sys.exit()
 		i=i+1
 	#print "\n"
+	print "outputting to other file"
+	print c
 	f = open(sys.argv[2],"w")
 	for ele in sorted(c.iteritems(),key=operator.itemgetter(1),reverse=True):
+		print str(ele[0])+" "+str(ele[1]*100.00)
 		f.write(str(ele[0])+" "+str(ele[1]*100.00))
 		f.write("\n")
 	f.close()
+	print f
 	print "\nDone!"
 
 

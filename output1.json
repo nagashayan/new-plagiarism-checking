@@ -1,0 +1,31 @@
+s--- ? NAGASHAYANA IS A GREAT MAN NAGASHAYANA IS A
+url-- https://www.googleapis.com/customsearch/v1?key=AIzaSyDk2x1ul4XaM5jJTEtH1yJAhF2NH01EhOY&cx=011424971895181672036:39kcreuzgaw&q=%22%EF+NAGASHAYANA+IS+A+GREAT+MAN+NAGASHAYANA+IS+A%22
+google results
+{u'url': {u'type': u'application/json', u'template': u'https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&relatedSite={relatedSite?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json'}, u'kind': u'customsearch#search', u'searchInformation': {u'formattedSearchTime': u'0.09', u'formattedTotalResults': u'0', u'totalResults': u'0', u'searchTime': 0.087532}, u'queries': {u'request': [{u'count': 10, u'outputEncoding': u'utf8', u'title': u'Google Custom Search - "  NAGASHAYANA IS A GREAT MAN NAGASHAYANA IS A"', u'safe': u'off', u'searchTerms': u'"  NAGASHAYANA IS A GREAT MAN NAGASHAYANA IS A"', u'cx': u'011424971895181672036:39kcreuzgaw', u'inputEncoding': u'utf8', u'totalResults': u'0'}]}}
+1/31completed...output--- {}
+c--- {}
+s--- A GREAT MAN NAGASHAYANA IS A GREAT MAN NAGASHAYANA
+url-- https://www.googleapis.com/customsearch/v1?key=AIzaSyDk2x1ul4XaM5jJTEtH1yJAhF2NH01EhOY&cx=011424971895181672036:39kcreuzgaw&q=%22A+GREAT+MAN+NAGASHAYANA+IS+A+GREAT+MAN+NAGASHAYANA%22
+google results
+{
+    u 'url': {
+        u 'type': u 'application/json',
+        u 'template': u 'https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&relatedSite={relatedSite?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json'
+    }, u 'kind': u 'customsearch#search', u 'searchInformation': {
+        u 'formattedSearchTime': u '0.25',
+        u 'formattedTotalResults': u '0',
+        u 'totalResults': u '0',
+        u 'searchTime': 0.246208
+    }, u 'queries': {
+        u 'request': [{
+            u 'count': 10,
+            u 'outputEncoding': u 'utf8',
+            u 'title': u 'Google Custom Search - "A GREAT MAN NAGASHAYANA IS A GREAT MAN NAGASHAYANA"',
+            u 'safe': u 'off',
+            u 'searchTerms': u '"A GREAT MAN NAGASHAYANA IS A GREAT MAN NAGASHAYANA"',
+            u 'cx': u '011424971895181672036:39kcreuzgaw',
+            u 'inputEncoding': u 'utf8',
+            u 'totalResults': u '0'
+        }]
+    }
+}
