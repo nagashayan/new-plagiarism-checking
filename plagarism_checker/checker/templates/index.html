@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    {% load static %}
+    <meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+    <title> Plagiarism Checker | Main Page </title>
+    <link href="{% static 'checker/css/bootstrap.css' %}" rel="stylesheet" media="screen">
+    <script src="{% static 'checker/js/jquery.js'  %}"></script>
+    <script src="{% static 'checker/js/bootstrap.min.js'  %}"></script>
+    <style>
+		input:focus
+		{
+    		outline:0px !important;
+    		-webkit-appearance:none;
+        }
+        a:focus
+		{
+    		outline:0px !important;
+    		-webkit-appearance:none;
+        }
+        button:focus
+		{
+    		outline:0px !important;
+    		-webkit-appearance:none;
+        }
+
+
+    </style>
+
+</head>
+<body>
+<div class='hero-unit'>
+    <h1> Plagiarism Checker </h1>
+    <h1>
+        <small>An online utility to check if a document's contents are plagiarsed. </small>
+    </h1>
+
+</div>
+
+<div class='well' style='margin:40px' align='center'>
+    <form action="/checker/" method="POST">
+        <label for="file">
+            <h3>Paste the text<h3>
+        </label>
+        <textarea rows="15" cols="150" name="check-text" style="width:auto"></textarea>
+        <div class='form-actions'>
+            <input class='btn btn-danger btn-large span3' type="submit" name="submit" value="Check Plagarism!">
+        </div>
+    </form>
+</div>
+{% if not init %}
+<div class='well' style='margin:40px' align='center'>
+
+
+    {% if no_match and not init %}
+    <p>No match Found 100% unique content</p>
+    {% else %}
+    <table>
+        <thead>
+        <tr>
+            <td>
+                URL
+            </td>
+            <td>
+                Text Matched
+            </td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for url,percentage_match in results.items %}
+        <tr>
+            <td>
+                <a href="{{ url }}" target="_blankpdb.set_trace()">{{ url }}</a>
+            </td>
+            <td>
+                {{ percentage_match}}
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
+</div>
+{% endif %}
+</body>
+</html>
