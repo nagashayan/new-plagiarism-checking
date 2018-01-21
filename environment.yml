@@ -1,0 +1,34 @@
+name: plagiarism
+channels:
+- defaults
+dependencies:
+- ca-certificates=2017.08.26=ha1e5d58_0
+- certifi=2017.11.5=py27hfa9a1c4_0
+- django=1.11.8=py27hd476221_0
+- libcxx=4.0.1=h579ed51_0
+- libcxxabi=4.0.1=hebd6815_0
+- libedit=3.1=hb4e282d_0
+- libffi=3.2.1=h475c297_4
+- ncurses=6.0=hd04f020_2
+- openssl=1.0.2n=hdbc3d79_0
+- pip=9.0.1=py27h1567d89_4
+- python=2.7.14=hde5916a_29
+- pytz=2017.3=py27h803c07a_0
+- readline=7.0=hc1231fa_4
+- setuptools=36.5.0=py27h2a45cec_0
+- sqlite=3.20.1=h7e4c145_2
+- tk=8.6.7=h35a86e2_3
+- wheel=0.30.0=py27h677a027_1
+- zlib=1.2.11=hf3cbc9b_2
+- pip:
+  - chardet==3.0.4
+  - docx==0.2.4
+  - idna==2.6
+  - lxml==4.1.1
+  - pillow==5.0.0
+  - python-dateutil==2.6.1
+  - requests==2.18.4
+  - six==1.11.0
+  - urllib3==1.22
+prefix: /Users/nagashayanaramamurthy/anaconda/envs/plagiarism
+
