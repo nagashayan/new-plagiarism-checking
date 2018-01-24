@@ -51,28 +51,23 @@ def searchWeb(text, output, c):
     if len(query) > 60:
         return output, c
     # using googleapis for searching web
-    payload = {'q' :  query, 'cx': '011424971895181672036:39kcreuzgaw', 'key': 'AIzaSyDk2x1ul4XaM5jJTEtH1yJAhF2NH01EhOY'}
+    payload = {'q' :  query, 'cx': 'YOUR_APP_ID', 'key': 'YOUR_API_KEY'}
     base_url = 'https://www.googleapis.com/customsearch/v1'
-    #url = base_url + '%22' + query + '%22'
-    #pdb.set_trace()
+
     custom_headers = {'Referer':'Google Chrome'}
     response = requests.get(base_url,params=payload,headers=custom_headers)
-    print response
-    print response.json()
+
     results = response.json()
-    print results
-    print "google results"
+
     # print results
     try:
 
         if (len(results) and 'searchInformation' in results and 'totalResults' in results['searchInformation'] and
                     results['searchInformation']['totalResults'] > 0):
-            print "inside1"
 
             for ele in results['items']:
 
                 Match = ele
-                print "inside 2"
                 content = Match['title']
                 if Match['link'] in output:
                     # print text
@@ -91,74 +86,60 @@ def searchWeb(text, output, c):
 #Main View
 @csrf_exempt
 def processInput(request):
+    try:
+        final_results = {}
+        no_match = True
+        init = True
+        if 'check-text' in request.POST:
 
-    print 'processInput'
+            t = request.POST['check-text']
 
-    print request.POST
-    #pdb.set_trace()
-    final_results = {}
-    no_match = True
-    init = True
-    if 'check-text' in request.POST:
+            # n-grams N VALUE SET HERE
+            n = 9
 
-        t = request.POST['check-text']
+            queries = getQueries(t, n)
+            q = [' '.join(d) for d in queries]
+            found = []
+            # using 2 dictionaries: c and output
+            # output is used to store the url as key and number of occurences of that url in different searches as value
+            # c is used to store url as key and sum of all the cosine similarities of all matches as value
+            output = {}
+            c = {}
+            i = 1
+            count = len(q)
+            if count > 100:
+                count = 100
 
-        # n-grams N VALUE SET HERE
-        n = 9
+            for s in q[:100]:
+                if s == '':
+                    continue
 
-        queries = getQueries(t, n)
-        q = [' '.join(d) for d in queries]
-        found = []
-        # using 2 dictionaries: c and output
-        # output is used to store the url as key and number of occurences of that url in different searches as value
-        # c is used to store url as key and sum of all the cosine similarities of all matches as value
-        output = {}
-        c = {}
-        i = 1
-        count = len(q)
-        if count > 100:
-            count = 100
-        #pdb.set_trace()
+                output, c = searchWeb(s, output, c)
+                msg = "\r" + str(i) + "/" + str(count) + "completed..."
+                sys.stdout.write(msg);
+                sys.stdout.flush()
 
-        for s in q[:100]:
-            if s == '':
-                continue
+                i = i + 1
+            # print "\n"
 
-            print "s---", s
-            output, c = searchWeb(s, output, c)
-            msg = "\r" + str(i) + "/" + str(count) + "completed..."
-            sys.stdout.write(msg);
-            sys.stdout.flush()
+        # final_results = {'https://solutions.softonic.com/movies/death-note-desu-noto': str(0.5477225575051661),
+        #                   'http://www.regione.lombardia.it/wps/wcm/connect/b99d117e-4508-4d54-9308-6c568cc20b7e/DOCUMENTAZIONE++da+allegare++alle+istanze+di+autorizzazione+paesaggistica+semplificata.doc?MOD=AJPERES&CACHEID=b99d117e-4508-4d54-9308-6c568cc20b7e': str(0.5477225575051661),
+        #                   'http://www.playbill.com/article/frank-wildhorn-musical-death-note-has-nyc-reading-with-andy-kelso-robert-cuccioli-and-adrienne-warren-prior-to-japanese-premiere-com-217333': str(0.5477225575051661),
+        #                   'https://www.youtube.com/watch?v=ziLu9FCaBFk': str(0.5477225575051661),
+        #                   'http://www.firstpost.com/entertainment/death-note-before-netflixs-film-a-look-at-the-original-dexter-meets-sherlock-anime-series-3954027.html': str(0.5477225575051661)}
 
-            print "output---", output
-            print "c---", c
-            # if i == 2:
-            # 	sys.exit()
-            i = i + 1
-        # print "\n"
-        print "outputting to other file"
-        print c
-        f = open('outputting.txt', "w")
+            for ele in sorted(c.iteritems(), key=operator.itemgetter(1), reverse=True):
+                percent = (ele[1] * 100.00)
+                if percent > 5:
+                    final_results[str(ele[0])] = str(percent)
 
-        pdb.set_trace()
-    # final_results = {'https://solutions.softonic.com/movies/death-note-desu-noto': str(0.5477225575051661),
-    #                   'http://www.regione.lombardia.it/wps/wcm/connect/b99d117e-4508-4d54-9308-6c568cc20b7e/DOCUMENTAZIONE++da+allegare++alle+istanze+di+autorizzazione+paesaggistica+semplificata.doc?MOD=AJPERES&CACHEID=b99d117e-4508-4d54-9308-6c568cc20b7e': str(0.5477225575051661),
-    #                   'http://www.playbill.com/article/frank-wildhorn-musical-death-note-has-nyc-reading-with-andy-kelso-robert-cuccioli-and-adrienne-warren-prior-to-japanese-premiere-com-217333': str(0.5477225575051661),
-    #                   'https://www.youtube.com/watch?v=ziLu9FCaBFk': str(0.5477225575051661),
-    #                   'http://www.firstpost.com/entertainment/death-note-before-netflixs-film-a-look-at-the-original-dexter-meets-sherlock-anime-series-3954027.html': str(0.5477225575051661)}
+            print "\nDone!"
 
-        for ele in sorted(c.iteritems(), key=operator.itemgetter(1), reverse=True):
-            percent = (ele[1] * 100.00)
-            if percent > 5:
-                final_results[str(ele[0])] = str(percent)
-                f.write(str(ele[0]) + " " + str(percent))
-                f.write("\n")
-        f.close()
-        print f
-        print "\nDone!"
+            if len(final_results) > 0:
+                no_match = False
+            init = False
 
-        if len(final_results) > 0:
-            no_match = False
-        init = False
+        return render(request, "index.html", {'results': final_results, 'no_match': no_match, 'init': init})
 
-    return render(request, "index.html", {'results': final_results, 'no_match': no_match, 'init': init})
+    Exception as e:
+    print 'Error ' + str(e)

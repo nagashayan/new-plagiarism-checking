@@ -14,7 +14,6 @@ import sys
 import operator
 import urllib, urllib2
 import json as simplejson
-
 # Given a text string, remove all non-alphanumeric
 # characters (using Unicode definition of alphanumeric).
 def getQueries(text,n):
@@ -50,34 +49,28 @@ def searchWeb(text,output,c):
 	if len(query)>60:
 	    return output,c
 	#using googleapis for searching web
-	base_url = 'https://www.googleapis.com/customsearch/v1?key=AIzaSyDk2x1ul4XaM5jJTEtH1yJAhF2NH01EhOY&cx=011424971895181672036:39kcreuzgaw&q='
+	base_url = 'https://www.googleapis.com/customsearch/v1?key=YOUR_API_KEY&cx=YOUR_APPLICATION_ID&q='
 	url = base_url + '%22' + query + '%22'
-	print 'url--',url
-	#sys.exit()
 	request = urllib2.Request(url,None,{'Referer':'Google Chrome'})
 	response = urllib2.urlopen(request)
 	results = simplejson.load(response)
-	print "google results"
-	print results
+
 	try:
 		
 		
 	    if ( len(results) and 'searchInformation' in results and 'totalResults' in results['searchInformation'] and results['searchInformation']['totalResults'] > 0):
-		    print "inside1"
-			
-		    for ele in	results['responseData']['results']:
 
-			    Match = results['responseData']['results'][0]
-			    print "inside 2"
-			    content = Match['content']
-			    if Match['url'] in output:
-				    #print text
-				    #print strip_tags(content)
-				    output[Match['url']] = output[Match['url']] + 1
-				    c[Match['url']] = (c[Match['url']]*(output[Match['url']] - 1) + cosineSim(text,strip_tags(content)))/(output[Match['url']])
+		    for ele in	results['items']:
+
+			    Match = ele
+			    content = Match['title']
+			    if Match['link'] in output:
+
+				    output[Match['link']] = output[Match['link']] + 1
+				    c[Match['link']] = (c[Match['link']]*(output[Match['link']] - 1) + cosineSim(text,strip_tags(content)))/(output[Match['link']])
 			    else:
-				    output[Match['url']] = 1
-				    c[Match['url']] = cosineSim(text,strip_tags(content))
+				    output[Match['link']] = 1
+				    c[Match['link']] = cosineSim(text,strip_tags(content))
 	except:
 		return output,c
 
@@ -114,18 +107,12 @@ def main():
 	if count>100:
 	    count=100
 	for s in q[:100]:
-		print "s---",s
 		output,c=searchWeb(s,output,c)
 		msg = "\r"+str(i)+"/"+str(count)+"completed..."
 		sys.stdout.write(msg);
 		sys.stdout.flush()
-		
-		print "output---",output
-		print "c---",c
-		if i == 2:
-			sys.exit()
+
 		i=i+1
-	#print "\n"
 	print "outputting to other file"
 	print c
 	f = open(sys.argv[2],"w")

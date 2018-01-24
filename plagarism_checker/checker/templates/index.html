@@ -1,13 +1,20 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+{% load static %}
+<!DOCTYPE html>
+<html>
 <head>
-    {% load static %}
     <meta content="text/html; charset=utf-8" http-equiv="content-type"/>
     <title> Plagiarism Checker | Main Page </title>
-    <link href="{% static 'checker/css/bootstrap.css' %}" rel="stylesheet" media="screen">
-    <script src="{% static 'checker/js/jquery.js'  %}"></script>
-    <script src="{% static 'checker/js/bootstrap.min.js'  %}"></script>
+   <link href="https://maxcdn.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet"
+         integrity="sha384-4FeI0trTH/PCsLWrGCD1mScoFu9Jf2NdknFdFoJhXZFwsvzZ3Bo5sAh7+zL8Xgnd" crossorigin="anonymous">
+
+    <script
+            src="https://code.jquery.com/jquery-1.12.4.min.js"
+            integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+            crossorigin="anonymous"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"
+            integrity="sha384-vOWIrgFbxIPzY09VArRHMsxned7WiY6hzIPtAIIeTFuii9y3Cr6HE6fcHXy5CFhc" crossorigin="anonymous"></script>
+
     <style>
 		input:focus
 		{
@@ -33,7 +40,7 @@
 <div class='hero-unit'>
     <h1> Plagiarism Checker </h1>
     <h1>
-        <small>An online utility to check if a document's contents are plagiarsed. </small>
+        <small>An online utility to check if a document's contents are plagiarsed.</small>
     </h1>
 
 </div>
@@ -85,7 +92,7 @@
 </div>
 {% endif %}
 <footer class="text-center">
-    Copyright © 2018  Nagashayan R - All Rights Reserved.
+    Copyright © 2018 Nagashayan R - All Rights Reserved.
 </footer>
 </body>
 </html>
