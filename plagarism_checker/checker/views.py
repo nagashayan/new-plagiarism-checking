@@ -116,8 +116,6 @@ def processInput(request):
 
                 output, c = searchWeb(s, output, c)
                 msg = "\r" + str(i) + "/" + str(count) + "completed..."
-                sys.stdout.write(msg);
-                sys.stdout.flush()
 
                 i = i + 1
             # print "\n"
@@ -129,9 +127,9 @@ def processInput(request):
         #                   'http://www.firstpost.com/entertainment/death-note-before-netflixs-film-a-look-at-the-original-dexter-meets-sherlock-anime-series-3954027.html': str(0.5477225575051661)}
 
             for ele in sorted(c.iteritems(), key=operator.itemgetter(1), reverse=True):
-                percent = (ele[1] * 100.00)
+                percent = math.ceil(ele[1] * 100.00)
                 if percent > 5:
-                    final_results[str(ele[0])] = str(percent)
+                    final_results[str(ele[0])] = str(percent) + "%"
 
             print "\nDone!"
 
@@ -141,5 +139,5 @@ def processInput(request):
 
         return render(request, "index.html", {'results': final_results, 'no_match': no_match, 'init': init})
 
-    Exception as e:
-    print 'Error ' + str(e)
+    except Exception as e:
+        print 'Error ' + str(e)
