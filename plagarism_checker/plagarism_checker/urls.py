@@ -19,6 +19,6 @@ from django.contrib import admin
 from checker import views
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^checker/$', views.processInput),
+    #url(r'^admin/', admin.site.urls),
+    url(r'^plagiarism-checker/$', views.processInput),
 ]
