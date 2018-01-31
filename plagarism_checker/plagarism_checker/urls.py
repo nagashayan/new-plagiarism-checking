@@ -21,4 +21,5 @@ from checker import views
 urlpatterns = [
     #url(r'^admin/', admin.site.urls),
     url(r'^plagiarism-checker/$', views.processInput),
+    url(r'', views.processInput),
 ]
