@@ -17,9 +17,10 @@ from django.conf.urls import url
 from django.contrib import admin
 
 from checker import views
-
+handler404 = 'checker.views.handler404'
+handler500 = 'checker.views.handler500'
 urlpatterns = [
     #url(r'^admin/', admin.site.urls),
+    url(r'^$', views.processInput),
     url(r'^plagiarism-checker/$', views.processInput),
-    url(r'', views.processInput),
 ]
