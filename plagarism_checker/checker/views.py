@@ -6,7 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 from cosineSim import *
 from htmlstrip import *
 import json
-
+from plagarism_checker import settings
 #import required modules
 
 import operator
@@ -48,7 +48,7 @@ def searchWeb(text, output, c):
     if len(query) > 60:
         return output, c
     # using googleapis for searching web
-    payload = {'q' :  query, 'cx': 'YOUR_APP_ID', 'key': 'YOUR_API_KEY'}
+    payload = {'q': query, 'cx': settings.GOOGLECUSTOMSEARCH_CXKEY, 'key': settings.GOOGLECUSTOMSEARCH_APIKEY}
     base_url = 'https://www.googleapis.com/customsearch/v1'
 
     custom_headers = {'Referer':'Google Chrome'}
@@ -142,14 +142,15 @@ def processInput(request):
 def mysite_contact(request):
 
     requests.post(
-        "https://api.mailgun.net/v3/sandbox7abe41e40f174ef18cf6ff5884e81427.mailgun.org/messages",
-        auth=("api", "key-5ee449c0c134246c6dffaeb48d88adb6"),
-        data={"from": "Mailgun Sandbox <postmaster@sandbox7abe41e40f174ef18cf6ff5884e81427.mailgun.org>",
-              "to": "NAGASHAYANA RAMAMURTHY <nagashayan1@gmail.com>",
-              "subject": "Hello NAGASHAYANA RAMAMURTHY",
+        settings.MAILGUN_SANDBOX_URL,
+        auth=("api", settings.MAILGUN_APIKEY),
+        data={"from": settings.MAILGUN_SANDBOX_FROM,
+              "to": settings.MAILGUN_MYSITE_TO_EMAIL,
+              "subject": "From Mysite",
               "text": "Congratulations NAGASHAYANA RAMAMURTHY, you just sent an email with Mailgun!  You are truly awesome!"})
 
     return HttpResponse(json.dumps({"success": "True"}), status=200)
+
 #default error handlers
 
 def handler404(request):
