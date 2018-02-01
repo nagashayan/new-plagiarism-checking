@@ -3,20 +3,15 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.core.mail import send_mail
 from cosineSim import *
 from htmlstrip import *
 import json
 
 #import required modules
-import codecs
-import traceback
-import sys
+
 import operator
-import urllib, urllib2
-import json as simplejson
+import urllib
 import requests
-import pdb;
 # Given a text string, remove all non-alphanumeric
 # characters (using Unicode definition of alphanumeric).
 def getQueries(text, n):
@@ -145,7 +140,7 @@ def processInput(request):
         print 'Error ' + str(e)
 
 def mysite_contact(request):
-    
+
     requests.post(
         "https://api.mailgun.net/v3/sandbox7abe41e40f174ef18cf6ff5884e81427.mailgun.org/messages",
         auth=("api", "key-5ee449c0c134246c6dffaeb48d88adb6"),
