@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.core.mail import send_mail
 from cosineSim import *
 from htmlstrip import *
+import json
 
 #import required modules
 import codecs
@@ -142,7 +144,17 @@ def processInput(request):
     except Exception as e:
         print 'Error ' + str(e)
 
+def mysite_contact(request):
+    
+    requests.post(
+        "https://api.mailgun.net/v3/sandbox7abe41e40f174ef18cf6ff5884e81427.mailgun.org/messages",
+        auth=("api", "key-5ee449c0c134246c6dffaeb48d88adb6"),
+        data={"from": "Mailgun Sandbox <postmaster@sandbox7abe41e40f174ef18cf6ff5884e81427.mailgun.org>",
+              "to": "NAGASHAYANA RAMAMURTHY <nagashayan1@gmail.com>",
+              "subject": "Hello NAGASHAYANA RAMAMURTHY",
+              "text": "Congratulations NAGASHAYANA RAMAMURTHY, you just sent an email with Mailgun!  You are truly awesome!"})
 
+    return HttpResponse(json.dumps({"success": "True"}), status=200)
 #default error handlers
 
 def handler404(request):

@@ -23,4 +23,7 @@ urlpatterns = [
     #url(r'^admin/', admin.site.urls),
     url(r'^$', views.processInput),
     url(r'^plagiarism-checker/$', views.processInput),
+    url(r'^contact-mail/$', views.mysite_contact),
+
+
 ]
