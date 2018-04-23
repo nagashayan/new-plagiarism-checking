@@ -20,4 +20,4 @@ A utility to check if a document's contents are plagiarised.
  * source activate "environment_name"
  * python manage.py runserver #To run django server
 
- ## Due credits to the base repository from where I forked from.
+ ## Due credits to the base repository.

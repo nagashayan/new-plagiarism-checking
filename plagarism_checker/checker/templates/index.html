@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118025637-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-118025637-1');
+    </script>
+
     <meta content="text/html; charset=utf-8" http-equiv="content-type"/>
     <title> Plagiarism Checker - Multi Language </title>
    <link href="https://maxcdn.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet"
@@ -30,7 +40,13 @@
     		outline:0px !important;
     		-webkit-appearance:none;
         }
-
+        .hero-unit{
+            padding:3px;
+            text-align: center;
+        }
+        .form-actions{
+            background-color: #ffffff;
+        }
 
     </style>
 
@@ -38,13 +54,13 @@
 <body>
 <div class='hero-unit'>
     <h1> Plagiarism Checker </h1>
-    <h1>
+    <h2>
         <small>An online utility to check if a document's contents are plagiarsed.</small>
-    </h1>
+    </h2>
 
 </div>
 
-<div class='well' style='margin:40px' align='center'>
+<div style='margin:40px' align='center'>
     <form action="/plagiarism-checker/" method="POST">
         <label for="file">
             <h3>Paste the text<h3>
